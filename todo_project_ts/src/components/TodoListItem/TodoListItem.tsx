@@ -6,7 +6,10 @@
 // }
 
 // export default TodoListItem;
+
 import React, { Component } from 'react';
+import { ITodo } from '../../types';
+import './TodoListItem.css'
 
 // Mutable(мутабельность) - изменение 
 // state - незименяемый (inmutable)
@@ -16,7 +19,11 @@ interface ITodoListItemState {
     important: boolean
 }
 
-export default class TodoListItem extends Component<{ text: string }, ITodoListItemState> {
+interface ITodoListItemProps extends ITodo {
+    onDoneClick: () => void
+}
+
+export default class TodoListItem extends Component<ITodoListItemProps, ITodoListItemState> {
 
     state = {
         done: false,
@@ -46,7 +53,9 @@ export default class TodoListItem extends Component<{ text: string }, ITodoListI
     }
 
     onChangeState = (nameState: 'done' | 'important') => {
+        //@ts-ignore
         this.setState((state) => {
+            //@ts-ignore
             return {
                 [nameState]: !state[nameState]
             }
@@ -54,17 +63,19 @@ export default class TodoListItem extends Component<{ text: string }, ITodoListI
     }
 
     render() {
-        console.log(this)
-        const { text } = this.props;
+        const { text, done, important } = this.props;
+
+        let classNames = '';
+        if (done) {
+            classNames += ' done';
+        }
+        if (important) {
+            classNames += ' important';
+        }
         return (
-            <li
-                style={{
-                    textDecoration: this.state.done ? 'line-through' : 'auto',
-                    fontWeight: this.state.important ? 'bold' : 'normal'
-                }}
-            >
+            <li className={classNames}>
                 {text}
-                <button onClick={() => this.onChangeState('done')}>Done</button>
+                <button onClick={this.props.onDoneClick}>Done</button>
                 <button onClick={() => this.onChangeState('important')}>Important</button>
             </li>
         )

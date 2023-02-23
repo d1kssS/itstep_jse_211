@@ -1,17 +1,71 @@
 // App - компонент
-import React from "react"
+import React, { Component } from "react"
 import { TodoList, Header } from "../components"
+import { ITodo } from "../types"
 
 // JSX - компоненты
 // JSX - элементы
-const App = () => {
+// const App = () => {
 
-    return (
-        <div>
-            <Header title="Todo App" />
-            <TodoList />
-        </div>
-    )
+
+//     return (
+//         <div>
+//             <Header title="Todo App" />
+//             <TodoList />
+//         </div>
+//     )
+// }
+
+// export default App;
+
+// Property drill
+
+interface IAppState {
+    todos: ITodo[]
 }
 
-export default App;
+export default class App extends Component<{}, IAppState> {
+
+    state = {
+        todos: [
+            { id: 1, text: 'Learn React', done: true, important: true },
+            { id: 2, text: 'Drink Water', done: false, important: false },
+            { id: 3, text: 'Drink Soda', done: false, important: false },
+        ]
+    }
+
+    onChangeStateTodos = (id: number) => {
+        this.setState((state) => {
+            // 1. нашли индекс элемента на который кликнули
+            const todoIdx = state.todos.findIndex(item => item.id === id)
+            // 2. создали копию с противоположным значением
+            const newTodo = {
+                ...state.todos[todoIdx],
+                done: !state.todos[todoIdx].done
+            }
+
+            // 3. создали новый массив с обновленной таской
+            const before = state.todos.slice(0, todoIdx);
+            const after = state.todos.slice(todoIdx + 1)
+
+            return {
+                todos: [...before, newTodo, ...after]
+            }
+
+        })
+    }
+
+
+    render() {
+
+        return (
+            <div>
+                <Header title="Todo App" />
+                <TodoList
+                    todos={this.state.todos}
+                    onDone={this.onChangeStateTodos}
+                />
+            </div>
+        )
+    }
+}
