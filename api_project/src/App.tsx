@@ -1,33 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { UserList, PostsList, SinglePost } from "./components";
 import "./styles.css";
+import { RouterProvider, Link } from "react-router-dom";
+import router from "./router";
 
 function App() {
-  const [isShow, setIsShow] = useState(false);
-  const [postId, setPostId] = useState(0);
-
-  const handleToggle = () => {
-    setIsShow(!isShow);
-  };
-
-  const onClickPost = (id: number) => {
-    setPostId(id);
-  };
-
   return (
-    <div className="App">
-      <button onClick={handleToggle}>Toggle</button>
-      {/* <UserList /> */}
-      <h1>{postId}</h1>
-      <div className="container">
-        <div className="column" style={{ display: isShow ? "block" : "none" }}>
-          {isShow && <PostsList onClickPost={onClickPost} />}
-        </div>
-        <div className="column">
-          <SinglePost />
-        </div>
-      </div>
-    </div>
+    <>
+      <RouterProvider router={router} />
+    </>
   );
 }
 

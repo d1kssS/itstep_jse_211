@@ -3,6 +3,7 @@ import apiClient from "../../common/api";
 import { useEffect } from "react";
 import { IPost } from "../../common/models";
 import "./PostsList.css";
+import { Link } from "react-router-dom";
 // hook - use
 
 interface IProps {
@@ -71,6 +72,7 @@ const PostsList: FC<IProps> = (props) => {
         <div key={post.id} className="post-item">
           <h4>{post.title}</h4>
           <p>{post.body}</p>
+          <Link to={`/posts/${post.id}`}>View</Link>
           <button onClick={() => props.onClickPost(post.id)}>View</button>
         </div>
       ))}
