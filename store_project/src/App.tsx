@@ -1,26 +1,64 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { AddProductForm, Counter, ProductList } from "./components";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Redux</h1>
+      <AddProductForm />
+      <ProductList />
+      {/* <Counter /> */}
     </div>
   );
-}
+};
 
 export default App;
+
+// const initialState = {
+//   counter: 0,
+// };
+
+// 1. Нет побочных эффектов
+// 2. Функция должна зависеть от переданных аргументов
+
+// @ts-ignore
+// const reducer = (state = initialState, action) => {
+//   switch (action?.type) {
+//     case "INC":
+//       return { ...state, counter: state.counter + 1 };
+//     case "DEC":
+//       return { ...state, counter: state.counter - 1 };
+//     case "RND":
+//       return { ...state, counter: state.counter + action.payload };
+//     default:
+//       return state;
+//   }
+// };
+// // @ts-ignore
+// let store = reducer(initialState);
+// console.log({ store });
+
+// const increment = { type: "INC" };
+
+// store = reducer(store, increment);
+// store = reducer(store, increment);
+// store = reducer(store, increment);
+
+// store = reducer(store, { type: "DEC" });
+// const rnd = Math.random() * 10;
+// store = reducer(store, { type: "RND", payload: rnd });
+
+// console.log({ store });
+
+/* <div id="list_container"></div>; */
+
+// 1. Получить контейнер
+// const list = [1, 2, 4, 5];
+
+// const variable = document.querySelector("#list_container");
+// const template =(item)=>{return `<p>${item}</p>`};
+
+// function renderList(list, container, templateFn) {
+//   list.forEach((item) => {
+//     container?.innerHTML += templateFn(item);
+//   });
+// }
