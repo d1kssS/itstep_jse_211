@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { PostsList, SinglePost } from "../components";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const PostsPage = () => {
   const [postId, setPostId] = useState(0);
@@ -19,7 +19,8 @@ const PostsPage = () => {
           <PostsList onClickPost={onClickPost} />
         </div>
         <div className="column">
-          <SinglePost />
+          <Outlet />
+          {/* <SinglePost /> */}
         </div>
       </div>
     </div>

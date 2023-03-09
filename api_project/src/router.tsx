@@ -8,8 +8,12 @@ const router = createBrowserRouter([
     element: <GeneralPage />,
     errorElement: <ErrorPage />,
     children: [
-      { path: "/posts", element: <PostsPage /> },
-      { path: "/posts/:postId", element: <SinglePostPage /> },
+      {
+        path: "/posts",
+        element: <PostsPage />,
+        children: [{ path: "/posts/:postId", element: <SinglePostPage /> }],
+      },
+      // { path: "/posts/:postId", element: <SinglePostPage /> },
     ],
   },
 ]);
