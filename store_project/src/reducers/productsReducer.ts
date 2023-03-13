@@ -1,5 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { createProductAction } from "../actions/productsActions";
+
 const initialState = {
   list: [{ id: 1, name: "Milk", price: 1230 }],
 };

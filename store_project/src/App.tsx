@@ -1,11 +1,25 @@
-import { AddProductForm, Counter, ProductList } from "./components";
+import { useSelector } from "react-redux";
+import {
+  AddProductForm,
+  Spinner,
+  Counter,
+  ProductList,
+  UsersList,
+} from "./components";
+import { RootState } from "./store";
 
 const App = () => {
+  const loader = useSelector<RootState, boolean>(
+    (state) => state.loader.loading
+  );
+
   return (
     <div>
       <h1>Redux</h1>
       <AddProductForm />
       <ProductList />
+      <UsersList />
+      {loader && <Spinner />}
       {/* <Counter /> */}
     </div>
   );
