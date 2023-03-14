@@ -3,6 +3,7 @@ import { counterReducer } from "./reducers/counterReducer";
 import usersReducer from "./reducers/usersReducer";
 import loaderSlice from "./reducers/loaderSlice";
 import { configureStore } from "@reduxjs/toolkit";
+import postsSlice from "./reducers/postsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     products: productsReducer,
     users: usersReducer,
     loader: loaderSlice,
+    posts: postsSlice,
   },
 });
 

@@ -1,6 +1,7 @@
 import { IUser } from "./../types/index";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchUsers } from "../actions/usersActions";
+import { deletePost } from "./postsSlice";
 
 interface IUsersReducer {
   users: IUser[];
@@ -19,11 +20,16 @@ const usersReducer = createSlice({
   initialState,
   reducers: {
     loadUsers: (state, action) => {
-      state.users = action.payload;
+      console.log("LOAD USERS");
+      state.users = [];
     },
   },
   extraReducers: (builder) => {
     builder
+      .addCase(deletePost, (state, action, ...rest) => {
+        console.log("postsSlice.actions.deletePost");
+        state.users = [];
+      })
       .addCase(
         fetchUsers.fulfilled,
         (state, action: PayloadAction<IUser[]>) => {
@@ -43,5 +49,5 @@ const usersReducer = createSlice({
 });
 
 console.log({ usersReducer });
-
+export const { loadUsers } = usersReducer.actions;
 export default usersReducer.reducer;

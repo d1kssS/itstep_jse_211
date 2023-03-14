@@ -1,5 +1,5 @@
 import { IUser } from "./../types/index";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { getUsers } from "../services/users";
 
 export const fetchUsers = createAsyncThunk<IUser[]>("USERS_FETCH", async () => {
@@ -7,4 +7,6 @@ export const fetchUsers = createAsyncThunk<IUser[]>("USERS_FETCH", async () => {
   return res;
 });
 
-console.log({fetchUsers})
+export const setUsers = createAction("SET_USERS");
+
+console.log({ fetchUsers });

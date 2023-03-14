@@ -5,6 +5,7 @@ import {
   Counter,
   ProductList,
   UsersList,
+  PostsList,
 } from "./components";
 import { RootState } from "./store";
 
@@ -20,6 +21,7 @@ const App = () => {
       <ProductList />
       <UsersList />
       {loader && <Spinner />}
+      <PostsList />
       {/* <Counter /> */}
     </div>
   );
