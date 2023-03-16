@@ -4,3 +4,6 @@ export { default as AddProductForm } from "./AddProductForm/AddProductForm";
 export { default as UsersList } from "./UsersList/UsersList";
 export { default as Spinner } from "./Spinner/Spinner";
 export { default as PostsList } from "./PostsList/PostsList";
+export { default as ThemeSwitcher } from "./ThemeSwitcher/ThemeSwitcher";
+export { default as Container } from "./Container/Container";
+export { default as ProgressBar } from "./ProgressBar/ProgressBar";

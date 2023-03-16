@@ -1,0 +1,20 @@
+.progress_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+}
+
+.light .progress_container {
+  background-color: #f3f3f3;
+}
+
+.dark .progress_container {
+  background-color: #505050;
+}
+
+.progress_bar {
+  height: 100%;
+  background-color: lightgreen;
+}

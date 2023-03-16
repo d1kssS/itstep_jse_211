@@ -6,24 +6,56 @@ import {
   ProductList,
   UsersList,
   PostsList,
+  Container,
+  ThemeSwitcher,
+  ProgressBar,
 } from "./components";
 import { RootState } from "./store";
+import ThemeWrapper, { TTheme } from "./context/theme";
+import { useEffect, useRef, useState } from "react";
 
 const App = () => {
   const loader = useSelector<RootState, boolean>(
     (state) => state.loader.loading
   );
 
+  const [theme, setTheme] = useState<TTheme>("light");
+  const [progress, setProgress] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (containerRef?.current) {
+        const { height } = containerRef.current.getBoundingClientRect();
+        const currentScroll = window.scrollY;
+        const scrollHeight = height - window.innerHeight;
+        const progress = Math.floor((currentScroll / scrollHeight) * 100);
+        setProgress(progress);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [containerRef]);
+
   return (
-    <div>
-      <h1>Redux</h1>
-      <AddProductForm />
-      <ProductList />
-      <UsersList />
-      {loader && <Spinner />}
-      <PostsList />
-      {/* <Counter /> */}
-    </div>
+    <ThemeWrapper.Provider value={{ theme, setTheme }}>
+      <div className="scrollBar" ref={containerRef}>
+        <Container>
+          <ProgressBar progress={progress} />
+          <h1>Redux</h1>
+          <ThemeSwitcher />
+          <AddProductForm />
+          <ProductList />
+          <UsersList />
+          {loader && <Spinner />}
+          <PostsList />
+          {/* <Counter /> */}
+        </Container>
+      </div>
+    </ThemeWrapper.Provider>
   );
 };
 
